@@ -5,6 +5,7 @@ from homebrew import Stepper
 btn_left = Pin(17, Pin.IN, Pin.PULL_DOWN)
 btn_right = Pin(16, Pin.IN, Pin.PULL_DOWN)
 btn_reset = Pin(18, Pin.IN, Pin.PULL_DOWN)
+btn_setpos = Pin(19, Pin.IN, Pin.PULL_DOWN)
 
 led_red = Pin(15, Pin.OUT, 0)
 led_green = Pin(14, Pin.OUT, 0)
@@ -13,7 +14,7 @@ led_blue = Pin(12, Pin.OUT, 0)
 
 motor = Stepper(0,1,2,3)
 
-motor.rotate_full_ccw()
+#motor.rotate_full_ccw()
 
 global step_count
 step_count= 0
@@ -53,9 +54,14 @@ def handler_btn_reset(pin):
     # led_yellow.value(0)
     motor.goto_startpos()
 
+def handler_btn_setpos(pin):
+    motor.set_startpos()
+
+
 btn_left.irq(trigger=Pin.IRQ_RISING, handler=handler_btn_left)
 btn_right.irq(trigger=Pin.IRQ_RISING, handler=handler_btn_right)
 btn_reset.irq(trigger=Pin.IRQ_RISING, handler=handler_btn_reset)
+btn_setpos.irq(trigger=Pin.IRQ_RISING, handler=handler_btn_setpos)
 
 while True:
     sleep(0.001)

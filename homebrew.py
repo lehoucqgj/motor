@@ -13,7 +13,6 @@ class Stepper:
         [1, 0, 0, 1],
     ]
     __full_rotation_steps = 512
-    #__step_count = 0
 
     def __init__(self, IN1, IN2, IN3, IN4):
         pins_stepper = [IN1, IN2, IN3, IN4]
@@ -28,11 +27,9 @@ class Stepper:
         self.__step_count = 0
 
     def goto_startpos(self):
-        print(self.__step_count)
-        #if self.__step_count > 0:
+        #print(self.__step_count)
         while self.__step_count > 0:
             self.move_counter_clockwise()
-        #elif self.__step_count < 0:
         while self.__step_count < 0:
             self.move_clockwise()
 
